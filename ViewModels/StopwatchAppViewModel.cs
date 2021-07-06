@@ -3,11 +3,7 @@ using Prism.Mvvm;
 using ProteiTestApp.Models;
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace ProteiTestApp.ViewModels
 {
@@ -89,7 +85,6 @@ namespace ProteiTestApp.ViewModels
                 AllCounterTabs.Add(tab);
             }
         }
-
         private void RemoveSelectedCounter()
         {
             if (AllCounterTabs.Count > 1 && SelectedCounterTab != null && 
@@ -99,10 +94,12 @@ namespace ProteiTestApp.ViewModels
             }
             SelectedCounter = SelectedCounterTab.Counter;
         }
+        private bool _isProgramWork = false;
         private async void StartStopCounterAsync()
         {
             SelectedCounterTab.Counter.StartOrStopWork();
-            while (true)
+            _isProgramWork = true;
+            while (_isProgramWork)
             {
                 SelectedCounter = SelectedCounterTab.Counter;
                 await Task.Delay(1);
@@ -114,7 +111,8 @@ namespace ProteiTestApp.ViewModels
         }
         private void CloseWindow()
         {
-            foreach(var tab in AllCounterTabs)
+            _isProgramWork = false;
+            foreach (var tab in AllCounterTabs)
                 tab.Counter.IsWork = false;
         }
         #endregion

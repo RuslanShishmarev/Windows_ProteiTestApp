@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProteiTestApp.Models
+﻿namespace ProteiTestApp.Models
 {
     public class StopwatcherTab
     {
@@ -12,9 +6,6 @@ namespace ProteiTestApp.Models
         {
             Counter = counter;
         }
-
-        public StopwatchCounter Counter { get; set; }
-
-
+        public StopwatchCounter Counter { get; private set; }
     }
 }

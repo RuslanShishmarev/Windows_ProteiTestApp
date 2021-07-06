@@ -42,13 +42,6 @@ namespace ProteiTestApp.Models
             CreationTime = DateTime.Now;
             _name = name;
         }
-        public StopwatchCounter(StopwatchCounter stopwatch)
-        {
-            CreationTime = stopwatch.CreationTime;
-            _name = stopwatch.Name;
-            AllMilliseconds = stopwatch.AllMilliseconds;
-            IsWork = stopwatch.IsWork;
-        }
 
         private int _allMilliseconds = 0;
         public int AllMilliseconds

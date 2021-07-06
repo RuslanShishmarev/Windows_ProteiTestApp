@@ -1,5 +1,5 @@
 # Windows_ProteiTestApp
-# ```diff 
+```diff 
 Тестовое задание .Net C# Wpf in blue
 ```
 В качестве тестового задания необходимо разработать оконное приложение для Windows

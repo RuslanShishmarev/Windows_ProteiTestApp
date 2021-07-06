@@ -1,0 +1,112 @@
+﻿<Window x:Class="ProteiTestApp.Views.StopwatchApp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProteiTestApp.Views"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding TitleName}" 
+        x:Name="mainWind"
+        Width="400"
+        MinWidth="100"
+        MaxHeight="300"
+        MinHeight="200">
+    <Window.Resources>
+        <ResourceDictionary Source="/Resources/Style/MainStyle.xaml"/>
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding CloseWindowCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto" MinHeight="50"/>
+            <RowDefinition Height="*" MinHeight="50"/>
+        </Grid.RowDefinitions>
+        <Button Content="Add" Command="{Binding AddNewCounterCommand}"
+                Grid.Row="0" Style="{StaticResource commonBtn}"/>
+        <TabControl Style="{StaticResource commonTab}"
+                        Grid.Row="1"
+                        ItemsSource="{Binding AllCounterTabs}"
+                        SelectedItem="{Binding SelectedCounterTab}">
+            <TabControl.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Remove" Command="{Binding RemoveCounterCommand}"/>
+                </ContextMenu>
+            </TabControl.ContextMenu>
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Counter.Name}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Command="{Binding ElementName=mainWind, Path=DataContext.StartStopCounterCommand}"
+                                        CommandParameter="{Binding SelectedCounterTab}"
+                                        Style="{StaticResource commonBtn}"  Padding="5">
+                                <Button.Content>
+                                    <TextBlock>
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=mainWind,
+                                                                Path=DataContext.SelectedCounter.IsInProcess}" Value="false">
+                                                        <Setter Property="Text" Value="Start"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=mainWind,
+                                                                Path=DataContext.SelectedCounter.IsWork}" Value="true">
+                                                        <Setter Property="Text" Value="Pause"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=mainWind,
+                                                                Path=DataContext.SelectedCounter.CanBeReset}" Value="true">
+                                                        <Setter Property="Text" Value="Continue"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Button.Content>
+                            </Button>
+                            <Button Content="Reset" Command="{Binding ElementName=mainWind,
+                                    Path=DataContext.ResetCounterCommand}" Padding="5">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource commonBtn}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=mainWind,
+                                                             Path=DataContext.SelectedCounter.IsInProcess}" Value="true">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=mainWind,
+                                                             Path=DataContext.SelectedCounter.CanBeReset}" 
+                                                             Value="true">
+                                                <Setter Property="IsEnabled" Value="True"/>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ElementName=mainWind,
+                                                             Path=DataContext.SelectedCounter.IsInProcess}" Value="false">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                                <Setter Property="Visibility" Value="Hidden"/>
+                                                <Setter Property="Width" Value="0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+        <TextBlock Grid.Row="2" 
+                   Text="{Binding SelectedCounter}" 
+                   Style="{StaticResource commonCounter}"/>
+    </Grid>
+</Window>

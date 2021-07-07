@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ProteiTestApp.Models
 {
-    public class StopwatchCounter
+    public class StopwatchCounter: IStopwatcher
     {
         private bool _isWork = false;
         public bool IsWork

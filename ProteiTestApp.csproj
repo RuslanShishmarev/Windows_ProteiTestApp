@@ -78,6 +78,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\IStopwatcher.cs" />
     <Compile Include="Models\StopwatchCounter.cs" />
     <Compile Include="Models\StopwatcherTab.cs" />
     <Compile Include="ViewModels\StopwatchAppViewModel.cs" />

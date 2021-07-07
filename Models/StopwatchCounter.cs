@@ -81,24 +81,26 @@ namespace ProteiTestApp.Models
             return counter;
         }
 
-        public async void StartOrStopWork(int speed = 1)
+        public async void StartWork(int speed = 1)
         {
-            IsWork = !IsWork;
-            if (IsWork)
-            {
-                await Task.Run(() =>
+            IsWork = true;
+            await Task.Run(() =>
                 {
                     while (IsWork)
                     {
-                        AllMilliseconds+=speed;
+                        AllMilliseconds += speed;
                         Thread.Sleep(1);
                     }
                 });
-            }
+
+        }
+        public void StopWork()
+        {
+            IsWork = false;
         }
         public void Reset()
         {
-            IsWork = false;
+            StopWork();
             AllMilliseconds = 0;
         }
     }

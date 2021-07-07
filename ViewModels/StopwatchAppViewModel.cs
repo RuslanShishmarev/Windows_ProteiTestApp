@@ -99,11 +99,11 @@ namespace ProteiTestApp.ViewModels
         {
             if (SelectedCounterTab.Counter.IsWork)
             {
-                SelectedCounterTab.Counter.StopWork();
+                SelectedCounterTab.Counter.Stop();
             }
             else
             {
-                SelectedCounterTab.Counter.StartWork(2);
+                SelectedCounterTab.Counter.Start(2);
                 _isProgramWork = true;
                 while (_isProgramWork)
                 {
@@ -120,7 +120,7 @@ namespace ProteiTestApp.ViewModels
         {
             _isProgramWork = false;
             foreach (var tab in AllCounterTabs)
-                tab.Counter.IsWork = false;
+                tab.Counter.Stop();
         }
         #endregion
     }

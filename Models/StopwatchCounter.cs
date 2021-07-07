@@ -10,7 +10,7 @@ namespace ProteiTestApp.Models
         public bool IsWork
         {
             get => _isWork;
-            set => _isWork = value;
+            private set => _isWork = value;
         }
         public bool IsInProcess
         {
@@ -81,7 +81,7 @@ namespace ProteiTestApp.Models
             return counter;
         }
 
-        public async void StartWork(int speed = 1)
+        public async void Start(int speed = 1)
         {
             IsWork = true;
             await Task.Run(() =>
@@ -94,13 +94,13 @@ namespace ProteiTestApp.Models
                 });
 
         }
-        public void StopWork()
+        public void Stop()
         {
             IsWork = false;
         }
         public void Reset()
         {
-            StopWork();
+            Stop();
             AllMilliseconds = 0;
         }
     }

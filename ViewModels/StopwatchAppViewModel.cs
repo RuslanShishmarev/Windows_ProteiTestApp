@@ -97,7 +97,7 @@ namespace ProteiTestApp.ViewModels
         private bool _isProgramWork = false;
         private async void StartStopCounterAsync()
         {
-            SelectedCounterTab.Counter.StartOrStopWork();
+            SelectedCounterTab.Counter.StartOrStopWork(2);
             _isProgramWork = true;
             while (_isProgramWork)
             {

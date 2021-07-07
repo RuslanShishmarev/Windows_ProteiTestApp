@@ -81,7 +81,7 @@ namespace ProteiTestApp.Models
             return counter;
         }
 
-        public async void StartOrStopWork()
+        public async void StartOrStopWork(int speed = 1)
         {
             IsWork = !IsWork;
             if (IsWork)
@@ -90,7 +90,7 @@ namespace ProteiTestApp.Models
                 {
                     while (IsWork)
                     {
-                        AllMilliseconds+=2;
+                        AllMilliseconds+=speed;
                         Thread.Sleep(1);
                     }
                 });

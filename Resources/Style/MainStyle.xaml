@@ -3,7 +3,7 @@
     <Style TargetType="TextBlock" x:Key="commonCounter">
         <Setter Property="FontFamily" Value="Helvetica,Roboto,Arial"/>
         <Setter Property="FontSize" Value="40"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
     <Style TargetType="Button" x:Key="commonBtn">
         <Setter Property="Background" Value="#0696d7"/>

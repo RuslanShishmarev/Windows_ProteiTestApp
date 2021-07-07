@@ -105,8 +105,9 @@
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
-        <TextBlock Grid.Row="2" 
-                   Text="{Binding SelectedCounter}" 
-                   Style="{StaticResource commonCounter}"/>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="{Binding SelectedCounter}" 
+                       Style="{StaticResource commonCounter}"/>            
+        </StackPanel>
     </Grid>
 </Window>
